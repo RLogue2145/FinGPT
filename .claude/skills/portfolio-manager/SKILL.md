@@ -32,8 +32,8 @@ Holdings: SOUN, BIOX, IMUX, TRON, TRX, OPTT, NRDY, ZSPC, HEPS (update as positio
 - Default: do **not** sell a position just because it's down.
 - Selling at a loss is justified only for:
   (a) a genuinely dead/stale asset — no realistic path back (bankruptcy, delisting, fraud, fundamental collapse), or
-  (b) a REALISTIC, non-fabricated projection that reallocating would recoup the loss faster than holding. No genuine basis = hold. Don't fabricate this analysis from price alone.
-- ZSPC is blanket-exempt from this analysis regardless of size (position too small in dollar terms to matter either way).
+  (b) **a proven track record, not a one-off projection (tightened 2026-07-17 per user).** A single "this reallocation should recoup faster" argument is NOT enough on its own — it's too easy to talk myself into a plausible-sounding case. This exception requires a demonstrated track record of this specific kind of decision (sell a loser, reallocate, it actually recoups faster) working out in practice. No such track record exists yet, so exception (b) is currently dormant — do not invoke it until there's real, logged evidence to point to, not just reasoning in the moment.
+- ZSPC's blanket exemption is under review — user is reconsidering it (2026-07-17) but hasn't given a final answer. **Do not sell or evaluate ZSPC for a loss-sale until the user confirms which way this goes.** Cost basis $35.20 (20 sh @ $1.76), current value ~$3.60 — remaining downside from here is small either way.
 - On the upside, keep applying profit-taking using the technical discipline rule above (real resistance, not round numbers).
 - IMUX status (2026-07-15): 1 share sold at $15.65 GTC, 1 share sold at $15.80 GTC, 1 share held uncapped as a tail. Update this note as fills happen or new positions get their own ladders.
 
