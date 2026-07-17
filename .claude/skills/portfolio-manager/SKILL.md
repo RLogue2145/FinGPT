@@ -59,6 +59,17 @@ Universe: leveraged/inverse ETPs identifiable by name ("2X Long/Short", "3X", "D
 - When there's settled cash to deploy: run/update the saved scan for a coiled-spring candidate — flat/quiet price today, relative volume 1.5x+, RSI 50-65, price $0.50-$20, excluding SPAC trusts ("Acquisition Corp" names near $10 NAV) and ETFs (leveraged ETF plays are handled by the sub-strategy above) — want a real operating company. Most recent non-leveraged add: HEPS (e-commerce, added 2026-07-15) — update this note as new positions get added.
 - Use a limit order sized off `get_equity_quotes`. Fully autonomous — attempt `review_equity_order` + `place_equity_order` directly, no live confirmation needed.
 
+## Sector relative-strength signal (probabilistic tilt, not prediction — added 2026-07-17)
+
+User's idea, refined: use historical data across multiple lookback windows to gauge which sectors currently have the strongest/weakest momentum, and use that as a bias for capital decisions — NOT as a claim that it predicts the next move. Be honest with the user about this distinction if it ever comes up: this follows a trend a bit after it starts, it does not call tops/bottoms or foresee news.
+
+- **Basket:** sector ETFs as proxies — XLK (tech), XLF (financials), XLE (energy), XLV (healthcare), XLP (staples), XLU (utilities), XLY (discretionary), XLI (industrials), XLB (materials), XLRE (real estate), XLC (communication services).
+- **Data:** `get_equity_historicals` per symbol, daily bars, going back ~400 days (covers the 365-day window with buffer).
+- **Compute:** % return over the last 30, 90, 180, and 365 days for each sector ETF. Composite score = weighted toward recent momentum, e.g. 40% (30d) + 30% (90d) + 20% (180d) + 10% (365d). Rank sectors strongest → weakest.
+- **Refresh cadence:** NOT every 20-minute cycle — sector trends don't move that fast and it's wasteful to recompute constantly. Refresh once per day, or right before a capital-deployment decision, whichever comes first. Cache the ranking with the date it was computed.
+- **Use 1 — new capital:** when the coiled-spring scan turns up a candidate, prefer one in a sector ranked in the stronger half of the list. This is a tiebreaker/bias on top of the existing scan criteria, not a replacement for them — and the sector-diversification rule (don't stack an already-heavy sector) still wins if the two conflict.
+- **Use 2 — exit bias on existing winners:** if a held position's sector has fallen to the weak end of the ranking (broad sector deterioration, not just one stock dipping), that raises the priority to actually execute the resting profit-taking targets from the technical discipline rule rather than letting it ride for more — and can justify biasing a new sell target toward the nearer edge of the real resistance zone rather than the far edge, since the sector backdrop is turning less favorable. This does NOT authorize selling at a loss — the core holdings rule is untouched; it only affects how eagerly gains get locked in on winners.
+
 ## Hard boundaries
 
 No margin, no options, no new capital/deposits (account isn't enabled for these anyway, but never attempt regardless).
