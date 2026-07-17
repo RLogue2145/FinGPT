@@ -49,12 +49,13 @@ Universe: leveraged/inverse ETPs identifiable by name ("2X Long/Short", "3X", "D
 
 ## General capital rotation (non-leveraged new positions)
 
-- Check `buying_power` each cycle. Don't let meaningful cash sit idle for long, but don't always deploy 100% either.
-- When a sale frees up cash: keep a reserve (~20-30% of the newly freed cash, or at least ~$10-15) as dry powder for buying dips in existing positions. If idle cash is trivially small (under ~$10), it's immaterial — skip forcing a trade.
-- When there's meaningful idle cash to deploy: run/update the saved scan for a coiled-spring candidate — flat/quiet price today, relative volume 1.5x+, RSI 50-65, price $0.50-$20, excluding SPAC trusts ("Acquisition Corp" names near $10 NAV) and ETFs (leveraged ETF plays are handled by the sub-strategy above) — want a real operating company.
+- Check `buying_power` each cycle — that's the authoritative spendable figure (settled funds), not `cash` (which includes proceeds still settling, typically ~T+1 after a sale).
+- Explicit user directive (2026-07-17): the account is small — don't sit on capital. **Deploy essentially all newly-settled cash** rather than holding back a 20-30% reserve. The goal is active cycling: buy a real, quality candidate, take profits per the technical discipline rule above when it runs, then immediately redeploy the proceeds into the next candidate. Grow the account through turnover, not by parking cash. "Not a bad buy just to spend cash" still applies — quality bar stays real, but bias is toward staying deployed, not toward holding reserve.
+- Only skip forcing a trade when idle cash is trivially small (under ~$10) — genuinely immaterial either way.
+- $100 max per new position remains, but as a **concentration-risk ceiling**, not a reserve requirement (~15% of total account value — recalc against `total_value` from `get_portfolio` as it changes). When freed/settled cash is under $100 to begin with, that whole amount can go into the next buy; the cap only bites once bigger sums free up (e.g. from a larger future sale).
+- When there's settled cash to deploy: run/update the saved scan for a coiled-spring candidate — flat/quiet price today, relative volume 1.5x+, RSI 50-65, price $0.50-$20, excluding SPAC trusts ("Acquisition Corp" names near $10 NAV) and ETFs (leveraged ETF plays are handled by the sub-strategy above) — want a real operating company.
 - Prefer diversifying sector/theme rather than repeating the same one back-to-back. Most recent non-leveraged add: HEPS (e-commerce, added 2026-07-15) — update this note as new positions get added.
-- Size the buy to leave the reserve described above, same $100/position cap. Use a limit order sized off `get_equity_quotes`.
-- Fully autonomous — attempt `review_equity_order` + `place_equity_order` directly, no live confirmation needed.
+- Use a limit order sized off `get_equity_quotes`. Fully autonomous — attempt `review_equity_order` + `place_equity_order` directly, no live confirmation needed.
 
 ## Hard boundaries
 
