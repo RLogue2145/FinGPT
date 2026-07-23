@@ -27,7 +27,7 @@ Worked example (IMUX, 2026-07-15): resistance was a real $15.68–$15.85 zone te
 
 ## Core holdings rule — selling at a loss
 
-Holdings: SOUN, BIOX, IMUX, TRON, TRX, OPTT, NRDY, ZSPC, HEPS (update as positions change).
+Holdings: SOUN, BIOX, IMUX, TRON, TRX, OPTT, NRDY, ZSPC, HEPS, AHG (update as positions change).
 
 - Default: do **not** sell a position just because it's down.
 - Selling at a loss is justified only for:
@@ -35,7 +35,8 @@ Holdings: SOUN, BIOX, IMUX, TRON, TRX, OPTT, NRDY, ZSPC, HEPS (update as positio
   (b) **a proven track record, not a one-off projection (tightened 2026-07-17 per user).** A single "this reallocation should recoup faster" argument is NOT enough on its own — it's too easy to talk myself into a plausible-sounding case. This exception requires a demonstrated track record of this specific kind of decision (sell a loser, reallocate, it actually recoups faster) working out in practice. No such track record exists yet, so exception (b) is currently dormant — do not invoke it until there's real, logged evidence to point to, not just reasoning in the moment.
 - ZSPC's blanket exemption is under review — user is reconsidering it (2026-07-17) but hasn't given a final answer. **Do not sell or evaluate ZSPC for a loss-sale until the user confirms which way this goes.** Cost basis $35.20 (20 sh @ $1.76), current value ~$3.60 — remaining downside from here is small either way.
 - On the upside, keep applying profit-taking using the technical discipline rule above (real resistance, not round numbers).
-- IMUX status (2026-07-15): 1 share sold at $15.65 GTC, 1 share sold at $15.80 GTC, 1 share held uncapped as a tail. Update this note as fills happen or new positions get their own ladders.
+- IMUX status: both resting sells filled 2026-07-17 (1sh @ $15.65, 1sh @ $15.80, realized gain $13.45 vs $9.00 cost). 1 share remains held uncapped as a tail, no resting orders on it currently. Update this note as new ladders get placed on other positions.
+- AHG status: bought 2026-07-20 (22sh @ $1.48 limit, filled 2026-07-21) via the general capital rotation rule below — sector diversification pick (Retail Trade/Internet Retail). No resting sell yet; apply the technical discipline rule to set profit-taking targets once it's moved enough to identify real resistance.
 
 ## Leveraged / inverse ETF sub-strategy (distinct — do not apply the hold-forever rule here)
 
@@ -56,7 +57,7 @@ Universe: leveraged/inverse ETPs identifiable by name ("2X Long/Short", "3X", "D
 - **Portfolio-level diversification is the real, explicit goal (user-confirmed 2026-07-17):** across the account as a whole, don't concentrate everything into one place. If a scenario ever calls for deploying a large freed sum (e.g. after a full liquidation), do NOT put all of it into one single asset — spread it. Also: don't keep buying into the *same* asset cycle after cycle without a sound reason to add to that specific position again (a real thesis reason is fine — chasing habit isn't).
 - **Diversification explicitly includes sector balance (user-confirmed 2026-07-17).** Context from the user: their main (non-agentic) account got over-concentrated in tech, and because tech and crypto tend to sell off together, a single bad day hits everything at once and has caused margin calls there — this agentic account has no margin so a margin call specifically can't happen here, but the underlying problem (a whole portfolio moving as one correlated block) is exactly what sector diversification is meant to prevent, and it applies here too. Before adding a new position: check the sector of existing holdings (`get_equity_fundamentals` returns `sector`) and avoid stacking further into a sector that's already heavily represented (current holdings already lean tech/software-adjacent: SOUN, NRDY, ZSPC) unless there's a sound, specific reason. Prefer a genuinely different sector/theme when the scan offers a reasonable choice.
 - The one real, explicit hard constraint from the user: **don't risk the whole account (~$600-700 total) going to zero in one day.**
-- When there's settled cash to deploy: run/update the saved scan for a coiled-spring candidate — flat/quiet price today, relative volume 1.5x+, RSI 50-65, price $0.50-$20, excluding SPAC trusts ("Acquisition Corp" names near $10 NAV) and ETFs (leveraged ETF plays are handled by the sub-strategy above) — want a real operating company. Most recent non-leveraged add: HEPS (e-commerce, added 2026-07-15) — update this note as new positions get added.
+- When there's settled cash to deploy: run/update the saved scan for a coiled-spring candidate — flat/quiet price today, relative volume 1.5x+, RSI 50-65, price $0.50-$20, excluding SPAC trusts ("Acquisition Corp" names near $10 NAV) and ETFs (leveraged ETF plays are handled by the sub-strategy above) — want a real operating company. Most recent non-leveraged add: AHG (Retail Trade/Internet Retail, added 2026-07-20, filled 2026-07-21) — update this note as new positions get added.
 - Use a limit order sized off `get_equity_quotes`. Fully autonomous — attempt `review_equity_order` + `place_equity_order` directly, no live confirmation needed.
 
 ## Sector relative-strength signal (probabilistic tilt, not prediction — added 2026-07-17)
@@ -69,6 +70,14 @@ User's idea, refined: use historical data across multiple lookback windows to ga
 - **Refresh cadence:** NOT every 20-minute cycle — sector trends don't move that fast and it's wasteful to recompute constantly. Refresh once per day, or right before a capital-deployment decision, whichever comes first. Cache the ranking with the date it was computed.
 - **Use 1 — new capital:** when the coiled-spring scan turns up a candidate, prefer one in a sector ranked in the stronger half of the list. This is a tiebreaker/bias on top of the existing scan criteria, not a replacement for them — and the sector-diversification rule (don't stack an already-heavy sector) still wins if the two conflict.
 - **Use 2 — exit bias on existing winners:** if a held position's sector has fallen to the weak end of the ranking (broad sector deterioration, not just one stock dipping), that raises the priority to actually execute the resting profit-taking targets from the technical discipline rule rather than letting it ride for more — and can justify biasing a new sell target toward the nearer edge of the real resistance zone rather than the far edge, since the sector backdrop is turning less favorable. This does NOT authorize selling at a loss — the core holdings rule is untouched; it only affects how eagerly gains get locked in on winners.
+
+## Crypto (added 2026-07-23 — currently unactionable, capability gap)
+
+User gave the account crypto holdings (~$34.23 as of 2026-07-23, visible only as an aggregate `crypto_value` figure in `get_portfolio`). Standing rule from the user: **never sell crypto at a loss; otherwise use judgment** — same spirit as the core equity holdings rule.
+
+**Real limitation, checked and confirmed 2026-07-23:** no crypto-specific tools exist in this session's Robinhood MCP toolset — no `get_crypto_positions`, no crypto quote tool, no crypto order-placement tool. `get_portfolio` shows the aggregate dollar value only; there's no way to see the coin, quantity, cost basis, current price, or place a trade. This was searched for directly (including the exact names hinted at in other tools' docs) and confirmed absent, not just overlooked.
+
+Because of this, the rule above is currently **dormant/unactionable** — do not fabricate a position, price, or action. Each cycle, note in passing whether crypto tools have appeared (a quick ToolSearch for crypto-related names costs little); the moment they do, start checking crypto holdings alongside equities each cycle and apply this same never-sell-at-a-loss rule to them.
 
 ## Hard boundaries
 
