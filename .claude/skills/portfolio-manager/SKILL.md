@@ -36,7 +36,7 @@ Holdings: SOUN, BIOX, IMUX, TRON, TRX, OPTT, NRDY, ZSPC, HEPS, AHG (update as po
 - ZSPC's blanket exemption is under review — user is reconsidering it (2026-07-17) but hasn't given a final answer. **Do not sell or evaluate ZSPC for a loss-sale until the user confirms which way this goes.** Cost basis $35.20 (20 sh @ $1.76), current value ~$3.60 — remaining downside from here is small either way.
 - On the upside, keep applying profit-taking using the technical discipline rule above (real resistance, not round numbers).
 - IMUX status: both resting sells filled 2026-07-17 (1sh @ $15.65, 1sh @ $15.80, realized gain $13.45 vs $9.00 cost). 1 share remains held uncapped as a tail, no resting orders on it currently. Update this note as new ladders get placed on other positions.
-- AHG status: bought 2026-07-20 (22sh @ $1.48 limit, filled 2026-07-21) via the general capital rotation rule below — sector diversification pick (Retail Trade/Internet Retail). No resting sell yet; apply the technical discipline rule to set profit-taking targets once it's moved enough to identify real resistance.
+- AHG status: bought 2026-07-20 (22sh @ $1.48 limit, filled 2026-07-21) via the general capital rotation rule below — sector diversification pick (Retail Trade/Internet Retail). Profit ladder placed 2026-07-23 (both GTC, both gains vs $1.48 cost): 11sh @ $1.58 undercutting a heavily-tested $1.60 rejection wall (a real 5,800-share ask sat at $1.60 on the tape), 11sh @ $1.65 undercutting the higher $1.66–$1.69 shelf. If either fills, redeploy proceeds per the capital rotation rule and update this note.
 
 ## Leveraged / inverse ETF sub-strategy (distinct — do not apply the hold-forever rule here)
 
